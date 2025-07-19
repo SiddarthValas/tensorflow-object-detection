@@ -1,75 +1,87 @@
+
+
 ⸻
 
-Object Detection with TensorFlow
+Custom Object Detection with TensorFlow
 
-This project provides a complete walkthrough for building a custom object detection model using the TensorFlow Object Detection API. The entire process is designed to run in a Google Colab notebook, making it accessible without the need for local setup.
+This repository provides a complete pipeline for training your own custom object detection model using the TensorFlow Object Detection API. The process is simplified using Google Colab, making it easy to run on free GPU hardware without any local setup.
+
+⸻
+
+Overview
+
+This project demonstrates the full lifecycle of a custom object detection task — from dataset preparation to training, exporting, and performing inference on new images. All major steps are integrated into a Colab notebook.
 
 ⸻
 
 Key Stages of the Project
 
-Data Preparation
-	•	Annotate images using LabelImg to draw bounding boxes.
-	•	Save the annotations as .xml files.
-	•	Convert the .xml files into the .tfrecord format required by TensorFlow.
+1. Data Preparation
+	•	Annotate your images using a tool like LabelImg.
+	•	Save the .xml annotation files in the same folders as the corresponding images.
+	•	Convert the annotated data into TFRecord format — a TensorFlow-compatible format for training.
 
-Model Configuration
-	•	Choose a pre-trained object detection model from the TensorFlow Model Zoo.
-	•	Modify the selected model’s pipeline configuration file to:
-	•	Reference your custom dataset
-	•	Define training and evaluation parameters
-	•	Point to your label map and TFRecord paths
+2. Model Configuration
+	•	Choose a pre-trained model from the TensorFlow Model Zoo.
+	•	Edit the model’s pipeline.config to:
+	•	Set the paths for TFRecord files
+	•	Link your label_map.pbtxt
+	•	Adjust training parameters (e.g., batch size, learning rate)
 
-Training
-	•	Use the provided Colab notebook to:
-	•	Install all necessary dependencies
-	•	Prepare your dataset
-	•	Train the model using a free GPU
-	•	Monitor training performance via metrics like loss
+3. Model Training
+	•	Use the tensorflow_object_detection_training_colab.ipynb notebook.
+	•	It installs dependencies, sets up the environment, and initiates training.
+	•	Training can be monitored in real time (e.g., loss values, step count).
 
-Export and Inference
-	•	Once training is complete, export the model as a frozen inference graph.
-	•	Use this trained model to make predictions on new, unseen images.
+4. Model Export and Inference
+	•	After training, export the model as a frozen inference graph.
+	•	Run inference on new images using the local_inference_test.ipynb notebook.
+	•	For optimized performance (especially on Intel devices), deployment via OpenVINO is also supported.
 
 ⸻
 
-How to Use This Repository
+Repository Usage
 
-1. Preparing Your Data
-	•	Organize your images into the following structure:
+Preparing Your Data
+	1.	Organize your dataset:
 
 ./data/images/train/
 ./data/images/test/
 
 
-	•	Store the .xml annotation files from LabelImg in the same directories.
-	•	If working from a forked repository, commit and push the image and annotation files.
+	2.	Save annotated .xml files in the same folders as images.
+	3.	If using a forked repo, push all image and annotation files to your fork.
 
-2. Training the Model
-	•	Open the notebook tensorflow_object_detection_training_colab.ipynb.
-	•	Set the repo_url variable to point to your GitHub repository.
-	•	Run the notebook cells sequentially to:
-	•	Install dependencies
-	•	Create TFRecords
-	•	Start the training process
+Training the Model
+	1.	Open tensorflow_object_detection_training_colab.ipynb.
+	2.	Set the repo_url variable to your GitHub repository.
+	3.	Run the notebook cells sequentially to:
+	•	Install required packages
+	•	Convert data to TFRecord
+	•	Start training the model
 
-3. Inference
-	•	Use local_inference_test.ipynb to run inference on new images.
-	•	For optimized deployment on Intel devices, refer to the provided OpenVINO integration guide.
+Running Inference
+	•	Use local_inference_test.ipynb for testing the model locally on new images.
+	•	Optionally, follow the OpenVINO guide in the repo for optimized deployment.
 
 ⸻
 
 Requirements
 	•	Frozen Inference Graph (frozen_inference_graph.pb)
-This is the exported, trained model, downloadable after training in Colab.
+Exported after training, this is the actual model used for inference.
 	•	Label Map File (label_map.pbtxt)
-Maps model output class indices to readable class names. Generated and downloaded in the notebook.
+Maps class indices (e.g., 0, 1, 2) to human-readable class names. Also generated in the notebook.
 
 ⸻
 
 Configs and Hyperparameters
 
-This project supports a wide range of object detection models. You can explore additional pre-trained models and their configuration files in the TensorFlow Detection Model Zoo and under object_detection/samples/configs/.
+This project supports a wide variety of object detection models. You can explore additional pre-trained models and configuration files at:
+
+TensorFlow Detection Model Zoo
+Config files: object_detection/samples/configs/
+
+You may modify these configs to tune the learning rate, optimizer type, augmentation, evaluation metrics, etc.
 
 ⸻
 
