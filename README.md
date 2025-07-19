@@ -1,3 +1,10 @@
+
+OBJECT DETECTION 
+
+
+
+
+
 This demonstration walks you through the full lifecycle of a custom object detection task — from data preparation to model deployment. All tasks are performed in a Google Colab notebook for ease of use and accessibility.
 
 ⸻
